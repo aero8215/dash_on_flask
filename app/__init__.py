@@ -20,6 +20,8 @@ def create_app():
 def register_dashapps(app):
     from app.dashapp1.layout import layout
     from app.dashapp1.callbacks import register_callbacks
+    from app.dashapp2.layout import layout as layout2
+    from app.dashapp2.callbacks import register_callbacks as register_callbacks2
 
     # Meta tags for viewport responsiveness
     meta_viewport = {"name": "viewport", "content": "width=device-width, initial-scale=1, shrink-to-fit=no"}
@@ -30,12 +32,24 @@ def register_dashapps(app):
                          assets_folder=get_root_path(__name__) + '/dashboard/assets/',
                          meta_tags=[meta_viewport])
 
+    dashapp2 = dash.Dash(__name__,
+                         server=app,
+                         url_base_pathname='/dashboard2/',
+                         assets_folder=get_root_path(__name__) + '/dashboard2/assets/',
+                         meta_tags=[meta_viewport])
+
     with app.app_context():
         dashapp1.title = 'Dashapp 1'
         dashapp1.layout = layout
         register_callbacks(dashapp1)
 
+    with app.app_context():
+        dashapp2.title = 'Dashapp 2'
+        dashapp2.layout = layout2
+        register_callbacks2(dashapp2)
+
     _protect_dashviews(dashapp1)
+    #_protect_dashviews(dashapp2)
 
 
 def _protect_dashviews(dashapp):

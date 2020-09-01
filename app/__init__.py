@@ -28,14 +28,14 @@ def register_dashapps(app):
 
     dashapp1 = dash.Dash(__name__,
                          server=app,
-                         url_base_pathname='/dashboard/',
+                         url_base_pathname='/dashapps/dashboard/',
                          assets_folder=get_root_path(__name__) + '/dashboard/assets/',
                          meta_tags=[meta_viewport])
 
     dashapp2 = dash.Dash(__name__,
                          server=app,
-                         url_base_pathname='/dashboard2/',
-                         assets_folder=get_root_path(__name__) + '/dashboard2/assets/',
+                         url_base_pathname='/dashapps/dashboard2/',
+                         assets_folder=get_root_path(__name__) + '/dashapps/dashboard2/assets/',
                          meta_tags=[meta_viewport])
 
     with app.app_context():
@@ -48,7 +48,7 @@ def register_dashapps(app):
         dashapp2.layout = layout2
         register_callbacks2(dashapp2)
 
-    _protect_dashviews(dashapp1)
+    #_protect_dashviews(dashapp1)
     #_protect_dashviews(dashapp2)
 
 
